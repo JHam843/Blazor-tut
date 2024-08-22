@@ -1,0 +1,39 @@
+﻿@page "/counter"
+@rendermode InteractiveServer
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+@* <input @onchange="InputChanged"/> *@
+
+<div>
+<p role="status">Current count:@currentCount @if (currentCount > 3)
+    {
+        <p>You Win!</p>
+    }
+</p>
+@* <button class="btn btn-primary" @onclick="()=>currentCount+=IncrementAmount">Click me</button> *@
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+</div>
+<p></p>
+<input @bind="text" />
+<button @onclick="()=>text=string.Empty">Clear</button>
+<p>@text</p>
+
+@code {
+    private int currentCount = 0;
+    string message = "";
+    string text = "";
+
+    [Parameter]
+    public int IncrementAmount { get; set; } = 1;
+
+    void InputChanged(ChangeEventArgs e)
+    {
+        message = (string)e.Value;
+    }
+    private void IncrementCount()
+    {
+        currentCount += IncrementAmount;
+    }
+}
